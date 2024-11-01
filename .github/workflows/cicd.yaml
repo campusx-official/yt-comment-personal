@@ -68,6 +68,6 @@ jobs:
         run: |
           pip install pytest
 
-      - name: Run latest staging model loading test
+      - name: Run latest model loading test
         run: |
           pytest scripts/test_load_model.py
