@@ -1,6 +1,9 @@
 name: CICD Pipeline
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   model-deployment:
@@ -34,3 +37,32 @@ jobs:
           AWS_DEFAULT_REGION: us-east-1  # Replace with your AWS region
         run: |
           dvc repro
+
+      - name: Push DVC-tracked data to remote
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1  # Replace with your AWS region
+        run: |
+          dvc push
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add changes to Git
+        run: |
+          git add .
+
+      - name: Commit changes
+        if: ${{ github.actor != 'github-actions[bot]' }}
+        run: |
+          git commit -m "Automated commit of DVC outputs and updated code" || echo "No changes to commit"
+
+      - name: Push changes
+        if: ${{ github.actor != 'github-actions[bot]' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push origin ${{ github.ref_name }}
