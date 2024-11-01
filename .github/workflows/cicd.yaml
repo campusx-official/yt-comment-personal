@@ -76,7 +76,7 @@ jobs:
         run: |
           pytest scripts/test_load_model.py
 
-      - name: Run model and vectorizer test
+      - name: Run model signature test
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

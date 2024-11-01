@@ -1,7 +1,6 @@
 import mlflow
 import pytest
 import pandas as pd
-import numpy as np
 import pickle
 from mlflow.tracking import MlflowClient
 
@@ -9,7 +8,7 @@ from mlflow.tracking import MlflowClient
 mlflow.set_tracking_uri("http://ec2-54-196-109-131.compute-1.amazonaws.com:5000/")
 
 @pytest.mark.parametrize("model_name, stage, vectorizer_path", [
-    ("my_model", "staging", "tfidf_vectorizer.pkl"),  
+    ("my_model", "staging", "tfidf_vectorizer.pkl"),  # Replace with your actual model name and vectorizer path
 ])
 def test_model_with_vectorizer(model_name, stage, vectorizer_path):
     client = MlflowClient()
@@ -32,7 +31,7 @@ def test_model_with_vectorizer(model_name, stage, vectorizer_path):
         # Create a dummy input for the model
         input_text = "hi how are you"
         input_data = vectorizer.transform([input_text])
-        input_df = pd.DataFrame(input_data.toarray(), columns=[str(i) for i in range(input_data.shape[1])])
+        input_df = pd.DataFrame(input_data.toarray(), columns=vectorizer.get_feature_names_out())  # <-- Use correct feature names
 
         # Predict using the model
         prediction = model.predict(input_df)
