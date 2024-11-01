@@ -72,6 +72,6 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-east-1  # Replace with your AWS region if different
+          AWS_DEFAULT_REGION: us-east-1
         run: |
           pytest scripts/test_load_model.py
