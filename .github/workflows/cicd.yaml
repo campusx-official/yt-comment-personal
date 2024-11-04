@@ -100,10 +100,6 @@ jobs:
           AWS_DEFAULT_REGION: us-east-1
         run: python scripts/promote_model.py
 
-      - name: Install flask api test dependencies
-        run: |
-          pip install requests
-
       - name: Start Flask App
         run: |
           nohup python flask_app/app.py &
