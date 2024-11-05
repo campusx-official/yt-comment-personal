@@ -111,3 +111,25 @@ jobs:
       - name: Run Flask API tests
         run: |
           pytest scripts/test_flask_api.py
+
+      - name: Login to AWS ECR
+        if: success()
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 390844758498.dkr.ecr.us-east-1.amazonaws.com
+
+      - name: Build Docker image
+        if: success()
+        run: |
+          docker build -t yt-demo .
+
+      - name: Tag Docker image
+        if: success()
+        run: |
+          docker tag yt-demo:latest 390844758498.dkr.ecr.us-east-1.amazonaws.com/yt-demo:latest
+
+      - name: Push Docker image to AWS ECR
+        if: success()
+        run: |
+          docker push 390844758498.dkr.ecr.us-east-1.amazonaws.com/yt-demo:latest
