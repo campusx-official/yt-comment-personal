@@ -18,4 +18,8 @@ if [ "$(docker ps -aq -f name=campusx-app)" ]; then
 fi
 
 # Run a new container
-docker run -p 80:5000 -e AWS_ACCESS_KEY_ID=AKIAVWABJXHRPNPEVTUE -e AWS_SECRET_ACCESS_KEY=fZfQ60nh7FzUwP2pgw3tj2a3pNJ1jSTsSsqABhrc --name 390844758498.dkr.ecr.us-east-1.amazonaws.com/yt-chrome-plugin-personal:latest
+# Replace these lines in your script with environment variables
+docker run -p 80:5000 --name campusx-app \
+    -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+    -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+    390844758498.dkr.ecr.us-east-1.amazonaws.com/yt-chrome-plugin-personal:latest
