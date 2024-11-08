@@ -1,0 +1,21 @@
+#!/bin/bash
+# Login to AWS ECR
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 390844758498.dkr.ecr.us-east-1.amazonaws.com
+
+# Pull the latest image
+docker pull 390844758498.dkr.ecr.us-east-1.amazonaws.com/yt-chrome-plugin-personal:latest
+
+# Check if the container 'campusx-app' is running
+if [ "$(docker ps -q -f name=campusx-app)" ]; then
+    # Stop the running container
+    docker stop campusx-app
+fi
+
+# Check if the container 'campusx-app' exists (stopped or running)
+if [ "$(docker ps -aq -f name=campusx-app)" ]; then
+    # Remove the container if it exists
+    docker rm campusx-app
+fi
+
+# Run a new container
+docker run -p 80:5000 -e AWS_ACCESS_KEY_ID=AKIAVWABJXHRPNPEVTUE -e AWS_SECRET_ACCESS_KEY=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 --name 390844758498.dkr.ecr.us-east-1.amazonaws.com/yt-chrome-plugin-personal:latest
