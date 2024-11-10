@@ -20,6 +20,6 @@ fi
 # Run a new container
 # Replace these lines in your script with environment variables
 docker run -p 80:5000 --name campusx-app \
-    -e AWS_ACCESS_KEY_ID=AKIAVWABJXHRN6NXDN7W \
-    -e AWS_SECRET_ACCESS_KEY=Y9AS8lWEiAkAcYDET26X9AjNq/PqgXoOX7oYYTOd \
+    -e AWS_ACCESS_KEY_ID=AKIAVWABJXHRFLD3UIYL \
+    -e AWS_SECRET_ACCESS_KEY=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 \
     390844758498.dkr.ecr.us-east-1.amazonaws.com/yt-chrome-plugin-personal:latest
