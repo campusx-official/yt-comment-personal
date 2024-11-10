@@ -17,7 +17,4 @@ if [ "$(docker ps -aq -f name=campusx-app)" ]; then
     docker rm campusx-app
 fi
 
-docker run -p 80:5000 --name campusx-app \
-    -e AWS_ACCESS_KEY_ID=AKIAVWABJXHRFLD3UIYL \
-    -e AWS_SECRET_ACCESS_KEY=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 \
-    390844758498.dkr.ecr.us-east-1.amazonaws.com/yt-chrome-plugin-personal:latest
+docker run -p 80:5000 --name campusx-app 390844758498.dkr.ecr.us-east-1.amazonaws.com/yt-chrome-plugin-personal:latest
