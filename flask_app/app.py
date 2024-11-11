@@ -65,7 +65,7 @@ model, vectorizer = load_model_and_vectorizer("my_model", "1", "./tfidf_vectoriz
 
 @app.route('/')
 def home():
-    return "Welcome to the app!"
+    return "Welcome to the flask api"
 
 @app.route('/health')
 def health():
