@@ -10,5 +10,5 @@ hooks:
       runas: ubuntu
   ApplicationStart:
     - location: deploy/scripts/start_docker.sh
-      timeout: 1200
+      timeout: 300
       runas: ubuntu
