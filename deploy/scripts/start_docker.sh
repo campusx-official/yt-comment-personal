@@ -20,6 +20,6 @@ if [ "$(docker ps -aq -f name=campusx-app)" ]; then
 fi
 
 echo "Starting new container..."
-docker run -p 80:5000 --name campusx-app 390844758498.dkr.ecr.us-east-1.amazonaws.com/yt-chrome-plugin-personal:latest
+docker run -p -d 80:5000 --name campusx-app 390844758498.dkr.ecr.us-east-1.amazonaws.com/yt-chrome-plugin-personal:latest
 
 echo "Container started successfully."
