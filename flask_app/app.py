@@ -67,6 +67,11 @@ model, vectorizer = load_model_and_vectorizer("my_model", "1", "./tfidf_vectoriz
 def home():
     return "Welcome to the app!"
 
+@app.route('/health')
+def health():
+    return jsonify({"status": "healthy"}), 200
+
+
 @app.route('/predict_with_timestamps', methods=['POST'])
 def predict_with_timestamps():
     data = request.json
